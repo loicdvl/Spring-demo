@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.services;
+package com.loicdev.springdemo.service;
 
 public class ResourceAlreadyExistsException extends RuntimeException {
 

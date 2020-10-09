@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.controllers;
+package com.loicdev.springdemo.controller;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.loicdev.springdemo.api.model.CustomerDTO;
 import com.loicdev.springdemo.api.model.CustomerListDTO;
-import com.loicdev.springdemo.services.CustomerService;
+import com.loicdev.springdemo.service.CustomerService;
 
 @Validated
 @RestController
@@ -44,8 +44,7 @@ public class CustomerController {
     public CustomerDTO getCustomerById(@PathVariable @Min(1) Long id){
         return customerService.getCustomerById(id);
     }
-
-
+    
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerDTO createNewCustomer(@Valid @RequestBody CustomerDTO customerDTO){

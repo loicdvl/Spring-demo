@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.services;
+package com.loicdev.springdemo.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.loicdev.springdemo.api.mapper.VendorMapper;
 import com.loicdev.springdemo.api.model.VendorDTO;
 import com.loicdev.springdemo.api.model.VendorListDTO;
-import com.loicdev.springdemo.controllers.VendorController;
+import com.loicdev.springdemo.controller.VendorController;
 import com.loicdev.springdemo.domain.Vendor;
-import com.loicdev.springdemo.repositories.VendorRepository;
+import com.loicdev.springdemo.repository.VendorRepository;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -33,6 +33,16 @@ public class VendorServiceImpl implements VendorService {
                 })
                 .orElseThrow(ResourceNotFoundException::new);
     }
+    
+    @Override
+	public VendorDTO findVendorByName(String name) {
+    	return vendorRepository.findByName(name)
+                .map(vendorMapper::vendorToVendorDTO)
+                .map(vendorDTO -> {
+                    return vendorDTO;
+                })
+                .orElseThrow(ResourceNotFoundException::new);
+	}
 
     @Override
     public VendorListDTO getAllVendors() {

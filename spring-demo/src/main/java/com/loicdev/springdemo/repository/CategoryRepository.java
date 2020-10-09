@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.repositories;
+package com.loicdev.springdemo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

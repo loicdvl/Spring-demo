@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.services;
+package com.loicdev.springdemo.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.loicdev.springdemo.api.mapper.CustomerMapper;
 import com.loicdev.springdemo.api.model.CustomerDTO;
-import com.loicdev.springdemo.controllers.CustomerController;
+import com.loicdev.springdemo.controller.CustomerController;
 import com.loicdev.springdemo.domain.Customer;
-import com.loicdev.springdemo.repositories.CustomerRepository;
+import com.loicdev.springdemo.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

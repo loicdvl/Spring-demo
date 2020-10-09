@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.controllers;
+package com.loicdev.springdemo.controller;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.loicdev.springdemo.services.DatabaseIntegrityViolationException;
-import com.loicdev.springdemo.services.ResourceAlreadyExistsException;
-import com.loicdev.springdemo.services.ResourceNotFoundException;
-import com.loicdev.springdemo.services.ResourceStorageException;
+import com.loicdev.springdemo.service.DatabaseIntegrityViolationException;
+import com.loicdev.springdemo.service.ResourceAlreadyExistsException;
+import com.loicdev.springdemo.service.ResourceNotFoundException;
+import com.loicdev.springdemo.service.ResourceStorageException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

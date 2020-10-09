@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.controllers;
+package com.loicdev.springdemo.controller;
 
 import java.util.ArrayList;
 import java.util.List;

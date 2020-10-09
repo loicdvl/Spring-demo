@@ -1,4 +1,4 @@
-package com.loicdev.springdemo.controllers;
+package com.loicdev.springdemo.controller;
 
 public class Violation {
 
