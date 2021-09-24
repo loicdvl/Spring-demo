@@ -3,22 +3,20 @@ package com.loicdev.springdemo.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import com.loicdev.springdemo.domain.Customer;
+import com.loicdev.springdemo.specification.CustomerSpecificationsBuilder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.loicdev.springdemo.api.model.CustomerDTO;
 import com.loicdev.springdemo.api.model.CustomerListDTO;
 import com.loicdev.springdemo.service.CustomerService;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Validated
 @RestController
@@ -37,6 +35,19 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getListOfCustomers(){
         return new CustomerListDTO(customerService.getAllCustomers());
+    }
+
+    @GetMapping("/filter")
+    @ResponseBody
+    public List<Customer> search(@RequestParam(value = "search") String search) {
+        CustomerSpecificationsBuilder builder = new CustomerSpecificationsBuilder();
+        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+        Matcher matcher = pattern.matcher(search + ",");
+        while (matcher.find()) {
+            builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+        }
+        Specification<Customer> spec = builder.build();
+        return customerService.findAll(spec);
     }
 
     @GetMapping({"/{id}"})

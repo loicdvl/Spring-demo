@@ -8,15 +8,15 @@ public interface CategoryService {
 	
 	List<CategoryDTO> getAllCategories();
 	
-	CategoryDTO findById(Long id);
+	CategoryDTO findById(Integer id);
 	
 	CategoryDTO getCategoryByName(String name);
 
 	CategoryDTO create(CategoryDTO categoryDTO);
 
-	CategoryDTO update(Long id, CategoryDTO categoryDTO);
+	CategoryDTO update(Integer id, CategoryDTO categoryDTO);
 
-	void deleteById(Long id);
+	void deleteById(Integer id);
 
 	
 }

@@ -3,6 +3,7 @@ package com.loicdev.springdemo.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.loicdev.springdemo.api.mapper.CustomerMapper;
@@ -100,5 +101,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Customer> findAll(Specification<Customer> spec) {
+        return null;
     }
 }

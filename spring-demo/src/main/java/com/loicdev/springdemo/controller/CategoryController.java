@@ -55,14 +55,14 @@ public class CategoryController {
     @PutMapping("{id}")
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.OK)
-    public CategoryDTO updateCategory(@PathVariable @Min(1) Long id, @Valid @RequestBody CategoryDTO categoryDTO) {
+    public CategoryDTO updateCategory(@PathVariable @Min(1) Integer id, @Valid @RequestBody CategoryDTO categoryDTO) {
     	return categoryService.update(id, categoryDTO);
     }
     
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.OK)
-    public CategoryDTO deleteCategory(@PathVariable @Min(1) Long id) {
+    public CategoryDTO deleteCategory(@PathVariable @Min(1) Integer id) {
     	CategoryDTO categoryDTO = categoryService.findById(id);
     	
     	categoryService.deleteById(id);

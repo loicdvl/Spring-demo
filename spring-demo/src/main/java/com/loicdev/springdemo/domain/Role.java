@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.loicdev.springdemo.api.validator.EnumNamePattern;
 import org.hibernate.annotations.NaturalId;
 
 import lombok.AllArgsConstructor;
@@ -29,5 +30,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
+    @EnumNamePattern(regexp = "ROLE_USER|ROLE_ADMIN", message = "Valeurs acceptées : ROLE_USER, ROLE_ADMIN")
     private RoleName name;
 }

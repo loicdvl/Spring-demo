@@ -1,5 +1,6 @@
 package com.loicdev.springdemo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,21 @@ public class CategoryServiceImpl implements CategoryService {
 				.map(categoryMapper::categoryToCategoryDTO)
 				.collect(Collectors.toList());
 	}
+
+	public List<CategoryDTO> getPostEditHistory(Integer categoryID) {
+
+		List<CategoryDTO> categoryDTOList = new ArrayList<CategoryDTO>();
+
+		categoryRepository.findRevisions(categoryID).get().forEach(x -> {
+			x.getEntity().setEditVersion(x.getMetadata());
+			categoryDTOList.add(categoryMapper.categoryToCategoryDTO((x.getEntity())));
+		});
+
+		return categoryDTOList;
+	}
 	
 	@Override
-	public CategoryDTO findById(Long id) {
+	public CategoryDTO findById(Integer id) {
 		return categoryMapper.categoryToCategoryDTO(categoryRepository.findById(id).get());
 	}
 
@@ -46,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryDTO update(Long id, CategoryDTO categoryDTO) {
+	public CategoryDTO update(Integer id, CategoryDTO categoryDTO) {
 		categoryDTO.setId(id);
 		return categoryMapper.categoryToCategoryDTO(
 				categoryRepository.save(
@@ -54,7 +67,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Integer id) {
 		categoryRepository.deleteById(id);
 	}
 }
